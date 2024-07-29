@@ -4,7 +4,7 @@ from .forms import StudentForm, MarkForm, AddMarksForm, PictureForm
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
-import pdfkit
+
 import uuid
 import os
 import base64
@@ -126,7 +126,7 @@ def studentid(request, student_id):
             'enable-local-file-access': None,
         }
 
-        pdf = pdfkit.from_string(html_content, False, configuration=config, options=options)
+        
 
         response = HttpResponse(pdf, content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="{student.name}_{student.admission_number}.pdf"'
