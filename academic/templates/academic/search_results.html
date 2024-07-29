@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f3f4f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #007BFF;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #007BFF;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f9f9f9;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: background 0.3s;
+        }
+
+        li:hover {
+            background: #e9ecef;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #777;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search Results for "{{ query }}"</h1>
+        
+        <h2>Courses</h2>
+        <ul>
+            {% if courses %}
+                {% for course in courses %}
+                    <li>{{ course.name }}</li>
+                {% endfor %}
+            {% else %}
+                <li class="no-results">No courses found.</li>
+            {% endif %}
+        </ul>
+        
+        <h2>Assignments</h2>
+        <ul>
+            {% if assignments %}
+                {% for assignment in assignments %}
+                    <li>{{ assignment.title }}</li>
+                {% endfor %}
+            {% else %}
+                <li class="no-results">No assignments found.</li>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>

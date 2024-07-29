@@ -1,0 +1,15 @@
+{% extends 'base1.html' %}
+
+{% block content %}
+<h2>Your Attendance Report</h2>
+
+{% if message %}
+    <p>{{ message }}</p>
+{% else %}
+    <ul>
+        {% for record in attendance %}
+            <li>{{ record.date }}: {{ record.status }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

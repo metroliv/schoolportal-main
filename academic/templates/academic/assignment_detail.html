@@ -1,0 +1,12 @@
+{% extends 'base1.html' %}
+
+{% block content %}
+<h2>Assignments for {{ assignments.first.course.name }}</h2>
+<ul>
+    {% for assignment in assignments %}
+        <li>{{ assignment.title }} (Due: {{ assignment.due_date }})</li>
+    {% empty %}
+        <li>No assignments found for this course.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

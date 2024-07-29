@@ -1,0 +1,15 @@
+{% extends 'base1.html' %}
+
+{% block content %}
+<h2>Your Grades</h2>
+
+{% if message %}
+    <p>{{ message }}</p>
+{% else %}
+    <ul>
+        {% for grade in grades %}
+            <li>{{ grade.course.name }}: {{ grade.score }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
