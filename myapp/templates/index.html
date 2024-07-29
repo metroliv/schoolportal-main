@@ -1,0 +1,1049 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image" href="fb.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Portal</title>
+    <style>
+/* styles.css */
+
+/* Preloader styles for flower-like animation */
+#preloader-flower {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flower-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.flower {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: rotateFlower 2s linear infinite;
+}
+
+.flower:before, .flower:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(76, 175, 80, 0.8); /* Transparent color */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: flowerAnimation 2s ease-in-out infinite;
+}
+
+.flower:before {
+    animation-delay: -1s;
+}
+
+.logo-flower {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 4em; /* Increased font size */
+    color: rgba(76, 175, 80, 0.8); /* Transparent color */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Text shadow for better visibility */
+}
+
+@keyframes rotateFlower {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes flowerAnimation {
+    0%, 100% {
+        width: 20px;
+        height: 20px;
+        transform: translate(-50%, -50%);
+    }
+    50% {
+        width: 40px;
+        height: 40px;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Ensure the rest of the page is hidden while loading */
+body.loading {
+    overflow: hidden;
+}
+
+/* Add your existing CSS here */
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #1976D2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header .user-info {
+            margin-right: 2rem;
+        }
+
+        header .user-info h2 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 1rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #45a049;
+        }
+
+        .logout {
+            margin-left: auto;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 20%;
+            background-color: #f4f4f4;
+            padding: 1rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #ddd;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 1rem;
+            background-color: white;
+            margin-left: 1rem;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #message-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        #new-message {
+            width: calc(100% - 90px);
+            padding: 0.5rem;
+        }
+
+        #send-message {
+            padding: 0.5rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #send-message:hover {
+            background-color: #45a049;
+        }
+
+       
+
+        footer {
+            background-color:  #1976D2;
+            color: #ecf0f1;
+            padding: 20px 0;
+            font-family: 'Arial', sans-serif;
+        }
+               
+        
+        .content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+        
+        .feature {
+            flex: 1 1 30%;
+            margin: 10px;
+        }
+        
+        .feature h2 {
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+        
+        .feature ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .feature ul li {
+            margin: 5px 0;
+        }
+        
+        .feature ul li i {
+            margin-right: 8px;
+        }
+        
+        .feature blockquote {
+            font-style: italic;
+            color: #bdc3c7;
+            border-left: 4px solid #e67e22;
+            margin: 10px 0;
+            padding-left: 10px;
+        }
+        
+        .feature blockquote footer {
+            font-style: normal;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .gallery img {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        
+        .map-container {
+            margin: 10px 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex: 1 1 30%;
+            margin: 10px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 10px;
+            color: #e67e22;
+        }
+        
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+        
+        .connect-button {
+            background-color: #e67e22;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        
+        .connect-button:hover {
+            background-color: #d35400;
+        }
+        
+        .subscribe-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .subscribe-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        
+        .footer-bottom p {
+            margin: 0;
+        }
+        
+        
+
+/* Specific Styling for Connect Buttons */
+.connect-button {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.connect-button:hover {
+    background-color: #45a049;
+}
+
+/* Social Media Icons */
+.footer-section img {
+    vertical-align: middle;
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Newsletter Subscription */
+#subscribe-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#subscribe-form input {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#subscribe-form .subscribe-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#subscribe-form .subscribe-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        margin-bottom: 20px;
+    }
+}
+
+
+
+
+
+.icon-container {
+    margin-bottom: 20px;
+}
+
+.icon-container h2 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.app-icon {
+    display: inline-block;
+    width: 100px;
+    margin: 10px;
+    text-align: center;
+}
+
+.app-icon a {
+    text-decoration: none;
+    color: #2c3e50;
+}
+
+.app-icon i {
+    font-size: 2em;
+    color: #2c3e50;
+    background-color: #ecf0f1;
+    border-radius: 50%;
+    padding: 10px;
+    display: block;
+    margin: 0 auto 5px auto;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.app-icon i:hover {
+    background-color: #e67e22;
+    color: #fff;
+}
+
+.app-icon p {
+    margin: 0;
+}
+
+
+        img {
+            background-color: #ddd;
+            border-radius: 50px;
+            height: 40px;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .video1 {
+            animation: fade 20s infinite;
+        }
+        
+        .video2 {
+            animation: fade 20s infinite alternate;
+        }
+        
+        @keyframes fade {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        h4{            
+            text-align: center;
+            color: cyan;
+        }
+        
+        .school-portal-dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .school-portal-dashboard h1 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 2.5em;
+            color: #2980b9;
+            margin-bottom: 20px;
+        }
+        
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .search-button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2980b9;
+            color: white;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        
+        .search-button i {
+            font-size: 1em;
+        }
+        .navbar .profile ul, .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        .navbar .profile ul li, .navbar ul li {
+            margin-right: 20px;
+        }
+        .navbar .profile ul li a, .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .navbar .profile ul li a svg {
+            margin-right: 8px;
+        }
+       
+        
+    </style>
+</head>
+<body>
+    <div id="preloader-flower">
+        <div class="flower-container">
+            <div class="flower">
+                <div class="logo-flower">SP</div>
+            </div>
+        </div>
+    </div>
+    <header>
+        <nav class="navbar">
+            <nav class="profile">
+                 <div class="profile">
+                    <div class="profile">
+                        <ul>
+                            <li>
+                                <a href="{% url 'profile' %}" id="profile_link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#4CAF50">
+                                        <path d="M12 2L1 8l11 6 9-5.25V13h2V8L12 2zm0 13.2l-7.15-3.9L4 13l8 4.8 8-4.8-.85-.7L12 15.2zm-8.7-4.3L4 13v5l8 4.8L20 18v-5l.7.4 1.3-2.2L12 4.8 2.3 8.7l1.3 2.2z"/>
+                                    </svg>
+                                    School Portal
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+        </div>
+            </nav>
+            <div class="user-info">
+                {% if user.is_authenticated %}
+                    <h2>Welcome, {{ user.username }}</h2>
+                {% else %}
+                    <h1>School Portal</h1>
+                {% endif %}
+            </div>
+            <ul>
+                <li><a href="{url'/' }" id="dashboard-link">Dashboard</a></li>
+                
+                <li><a href="{% url 'chat_list' %}" id="chat_list">Chat with Users</a></li>
+                <li><a href="#" id="assignments-link">Assignments</a></li>
+                <div class="logout">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Sign In</a></li>
+                    {% endif %}
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="dashboard" class="active">
+            <h1>Dashboard</h1>
+            <p>Welcome to the School Portal!</p>
+            <div class="container">
+                <div class="sidebar">
+                    <ul>
+                    
+                        <li><a href="{% url 'course_list' %}">Courses</a></li>
+                        <li><a href="{% url 'grades_list' %}">Grades</a></li>
+                        <li><a href="{% url 'attendance_report' %}">Attendance</a></li>                        
+                        <li><a href="{% url 'student_list' %}" id="student_list_link">Students</a></li>
+                        <li><a href="{% url 'staff_list' %}" id="staff_list_link">Staff</a></li>
+                        <li><a href="#" id="enter-marks-link">Enter Marks</a></li>
+                        <li><a href="{% url 'profile' %}" id="profile_link">Profile</a></li>
+                        <li><a href="{% url 'category_list' %}" id="category_list">Help</a></li>
+                        <li><a href="post_detail.html">Post</a></li>
+                        <li><a href="{% url 'group_list' %}">Community</a></li>
+                        <li><a href="#">New Group</a></li>
+                        <li><a href="#">Chats</a></li>
+                        <li><a href="#">Announcements</a></li>
+                        <li><a href="#">Create Live Chat</a></li>
+                        <li><a href="create_group">WhatsApp Group</a></li>
+                        <li><a href="#">Account</a></li>
+                        <li><a href="#">Notifications</a></li>
+                        <li><a href="{% url 'event_list' %}">Pin Event</a></li>
+                        <li><a href="#">Meeting</a></li>
+                        <li><a href="{% url 'user_settings' %}">Settings</a></li>
+                    </ul>
+                </div>
+                
+                <div class="main-content" id="main-content">
+                   
+                    <div class="school-portal-dashboard">
+                        <h1>School Portal Dashboard</h1>
+                    
+                    <div class="search-container">
+                        <input type="text" placeholder="Search..." class="search-input">
+                        <button class="search-button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                    <video autoplay muted loop class="background-video video1">
+                        <source src="{% static 'video1.mp4' %}" type="video/mp4">
+                    </video>
+                    
+                    <video autoplay muted loop class="background-video video2">
+                        <source src="{% static '.video2.mp4' %}" type="video/mp4">
+                    </video>
+ 
+    
+        <div class="icon-container">
+            <h2>Communication</h2>
+            <div class="app-icon">
+                <a href="{% url 'chat_list' %}">
+                    <i class="fas fa-comments"></i>
+                    <p>Chat</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="{% url 'group_list' %}">
+                    <i class="fas fa-users"></i>
+                    <p>Community</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-user-plus"></i>
+                    <p>New Group</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-bullhorn"></i>
+                    <p>Announcements</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-video"></i>
+                    <p>Live Chat</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fab fa-whatsapp"></i>
+                    <p>WhatsApp Group</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="icon-container">
+            <h2>Academics</h2>
+            <div class="app-icon">
+                <a href="{% url 'student_list' %}">
+                    <i class="fas fa-user-graduate"></i>
+                    <p>Student List</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-file-invoice"></i>
+                    <p>Fees Invoice</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-file-alt"></i>
+                    <p>Exams</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-book"></i>
+                    <p>Assignments</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p>Academic Calendar</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-bell"></i>
+                    <p>Notifications</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-thumbtack"></i>
+                    <p>Pin Event</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-handshake"></i>
+                    <p>Meeting</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="icon-container">
+            <h2>Administration</h2>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-user-cog"></i>
+                    <p>Account</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="{% url 'category_list' %}">
+                    <i class="fas fa-question-circle"></i>
+                    <p>Help Center</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-paper-plane"></i>
+                    <p>Submit Request</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-id-card"></i>
+                    <p>Student ID</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="{% url 'user_settings' %}">
+                    <i class="fas fa-cogs"></i>
+                    <p>Settings</p>
+                </a>
+            </div> 
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-chart-line"></i>
+                    <p>Performance</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-file-invoice"></i>
+                    <p>Fees Invoice</p>
+                </a>
+            </div>           
+        </div>
+        <div class="icon-container">
+            <h2>Resources</h2>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-book-open"></i>
+                    <p>Library</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-laptop"></i>
+                    <p>Online Courses</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-tools"></i>
+                    <p>Tools & Resources</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-comments"></i>
+                    <p>Student Forum</p>
+                </a>
+            </div>
+            <div class="app-icon">
+                <a href="#">
+                    <i class="fas fa-bolt"></i>
+                    <p>Emergency Contacts</p>
+                </a>
+        </div>
+    </div>
+    <div class="icon-container">
+        <h2>Events</h2>
+        <div class="app-icon">
+            <a href="#">
+                <i class="fas fa-calendar-alt"></i>
+                <p>Event Calendar</p>
+            </a>
+        </div>
+        <div class="app-icon">
+            <a href="#">
+                <i class="fas fa-bell"></i>
+                <p>Upcoming Events</p>
+            </a>
+        </div>
+        <div class="app-icon">
+            <a href="#">
+                <i class="fas fa-party-horn"></i>
+                <p>Celebrations</p>
+            </a>
+        </div>
+        <div class="app-icon">
+            <a href="#">
+                <i class="fas fa-clipboard-list"></i>
+                <p>Event Registration</p>
+            </a>
+        </div>
+        <div class="app-icon">
+            <a href="#">
+                <i class="fas fa-users"></i>
+                <p>Event Participants</p>
+            </a>
+        </div>
+        <div class="app-icon">
+            <a href="#">
+                <i class="fas fa-star"></i>
+                <p>Featured Events</p>
+            </a>
+        </div>
+        <div class="app-icon">
+            <a href="#">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>Event Locations</p>
+            </a>
+        </div>
+        <div class="app-icon">
+            <a href="#">
+                <i class="fas fa-camera"></i>
+                <p>Event Gallery</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+    </main>
+
+  
+    <footer>
+        <div class="content">
+            <div class="feature">
+                <h2>Latest Announcements</h2>
+                <ul>
+                    <li><i class="fas fa-bullhorn"></i> School will be closed on July 20th for maintenance.</li>
+                    <li><i class="fas fa-book"></i> New courses are available for the upcoming semester!</li>
+                    <li><i class="fas fa-users"></i> Parent-Teacher meetings scheduled for July 25th.</li>
+                </ul>
+            </div>
+            <div class="feature">
+                <h2>Upcoming Events</h2>
+                <ul>
+                    <li><i class="fas fa-calendar-alt"></i> Open House: August 1st, 10 AM - 2 PM</li>
+                    <li><i class="fas fa-flask"></i> Science Fair: August 15th, 9 AM - 5 PM</li>
+                    <li><i class="fas fa-futbol"></i> Sports Day: August 30th, all day</li>
+                </ul>
+            </div>
+            <div class="feature">
+                <h2>News & Updates</h2>
+                <p><i class="fas fa-newspaper"></i> Check out the latest updates on our school website!</p>
+                <p><i class="fas fa-laptop"></i> We're launching a new online learning platform for students.</p>
+            </div>
+            <div class="feature">
+                <h2>Contact Information</h2>
+                <p><i class="fas fa-envelope"></i> Email: info@schoolportal.com</p>
+                <p><i class="fas fa-phone"></i> Phone: +254 456 7890</p>
+                <p><i class="fas fa-map-marker-alt"></i> Address:30100-770 Nairobi</p>
+            </div>
+            <div class="feature">
+                <h2>Student Resources</h2>
+                <ul>
+                    <li><i class="fas fa-book-open"></i> <a href="#">Library</a></li>
+                    <li><i class="fas fa-graduation-cap"></i> <a href="#">Tutoring</a></li>
+                    <li><i class="fas fa-laptop-code"></i> <a href="#">Online Courses</a></li>
+                </ul>
+            </div>
+            <div class="feature">
+                <h2>Recent Achievements</h2>
+                <ul>
+                    <li><i class="fas fa-trophy"></i> Student A won the National Science Olympiad!</li>
+                    <li><i class="fas fa-basketball-ball"></i> Our basketball team reached the finals!</li>
+                    <li><i class="fas fa-paint-brush"></i> Art Club showcased their work in the community gallery.</li>
+                </ul>
+            </div>
+            <div class="feature">
+                <h2>Testimonials</h2>
+                <blockquote>
+                    <p><i class="fas fa-quote-left"></i> This school has transformed my child's education! <i class="fas fa-quote-right"></i></p>
+                    <footer>— Parent of a student</footer>
+                </blockquote>
+                <blockquote>
+                    <p><i class="fas fa-quote-left"></i> Amazing faculty and staff! <i class="fas fa-quote-right"></i></p>
+                    <footer>— Alumni</footer>
+                </blockquote>
+            </div>
+            <div class="feature">
+                <h2>Gallery</h2>
+                <a href= "#">view more</a>
+                <div class="gallery">
+                    <img src="gallery1.jpg" alt="Gallery Image 1">
+                    <img src="{% static 'try.jpeg' %}" alt="Logo" class="img-responsive img-circle">
+                    <img src="gallery3.jpg" alt="Gallery Image 3">
+                    
+                </div>
+            </div>
+            <div class="feature">
+                <h2>Find Us</h2>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.8354345073276!2d144.95592751531672!3d-37.817209979751775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf0727d8f2a2d5c36!2sEducation%20City!5e0!3m2!1sen!2sus!4v1615511762000!5m2!1sen!2sus" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><a href="tel:+254799553357" class="connect-button"><i class="fas fa-phone"></i> Call</a></p>
+                <p><a href="https://wa.me/+254799553357" class="connect-button"><i class="fab fa-whatsapp"></i> WhatsApp</a></p>
+                <p><a href="mailto:victormuinge@gmail.com" class="connect-button"><i class="fas fa-envelope"></i> Email</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p><a href="#"><i class="fab fa-facebook"></i> Facebook</a></p>
+                <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
+                <p><a href="#"><i class="fab fa-instagram"></i> Instagram</a></p>
+                <p><a href="#"><i class="fab fa-youtube"></i> YouTube</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#">Home</a></p>
+                <p><a href="#">Events</a></p>
+                <p><a href="#">Members</a></p>
+                <p><a href="{% url 'category_list' %}" id="category_list">Help Center</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter Subscription</h3>
+                <form id="subscribe-form" action="{% url 'subscribe' %}" method="post">
+                    {% csrf_token %}
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <button type="submit" class="subscribe-button">Subscribe</button>
+                </form>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div class="footer-section">
+                 <a href= "#"><h3>About Us</h3></a>
+                
+                <p>We are committed to providing the best services to our community. Learn more about our mission and values <a href="#">here</a>.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your School Portal. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="{% static 'script.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.body.classList.add('loading');
+        });
+    
+        window.addEventListener("load", function() {
+            var preloaderRotate = document.getElementById('preloader-rotate');
+            if (preloaderRotate) {
+                preloaderRotate.style.display = 'none';
+            }
+            
+            var preloaderFlower = document.getElementById('preloader-flower');
+            if (preloaderFlower) {
+                preloaderFlower.style.display = 'none';
+            }
+            
+            document.body.classList.remove('loading');
+        });
+    </script>
+    
+    
+    
+    
+    
+</body>
+</html>

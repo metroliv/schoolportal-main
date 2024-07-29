@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe</title>
+    
+</head>
+<body>
+
+<div class="subscribe-container">
+    <h3>Newsletter Subscription</h3>
+    <form id="subscribe-form" action="{% url 'subscribe' %}" method="post">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Your Email" required>
+        <button type="submit" class="subscribe-button">Subscribe</button>
+    </form>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+
+</body>
+</html>

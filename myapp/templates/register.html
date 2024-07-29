@@ -1,0 +1,137 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        h5 {
+            color: red;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background: #218838;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+        .user-type {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Sign Up Below</h1>
+        {% for message in messages %}
+            <h5>{{ message }}</h5>
+        {% endfor %}
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required/><br>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email"/><br>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password"/><br>
+            <label for="password2">Repeat Password</label>
+            <input type="password" name="password2" id="password2"/><br>
+            
+            <div class="user-type">
+                <label for="user_type">Register as:</label>
+                <select name="user_type" id="user_type" required>
+                    <option value="student">Student</option>
+                    <option value="staff">Staff</option>
+                    <option value="superuser">Superuser</option>
+                </select>
+            </div>
+
+            <div id="additional_fields">
+                <!-- Additional fields for student or staff will be added here via JavaScript -->
+            </div>
+
+            <input type="submit" value="Sign Up">
+            <button><a href="{% url 'login' %}">Login if registered</a></button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('user_type').addEventListener('change', function() {
+            const additionalFields = document.getElementById('additional_fields');
+            additionalFields.innerHTML = ''; // Clear previous fields
+
+            if (this.value === 'student') {
+                additionalFields.innerHTML += `
+                    <label for="admission_number">Admission Number</label>
+                    <input type="text" name="admission_number" required/><br>
+                `;
+            } else if (this.value === 'staff') {
+                additionalFields.innerHTML += `
+                    <label for="staff_id">Staff ID</label>
+                    <input type="text" name="staff_id" required/><br>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
