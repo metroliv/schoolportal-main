@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h1>Confirm Student ID</h1>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th style="width: 30%;">Name</th>
+                    <td>{{ student.name }}</td>
+                </tr>
+                <tr>
+                    <th>Age</th>
+                    <td>{{ student.age }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ student.email }}</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>{{ student.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <td>{{ student.location }}</td>
+                </tr>
+                <tr>
+                    <th>Hobby</th>
+                    <td>{{ student.hobby }}</td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>{{ student.get_gender_display }}</td>
+                </tr>
+                <tr>
+                    <th>Admission Number</th>
+                    <td>{{ student.admission_number }}</td>
+                </tr>
+                <tr>
+                    <th>Serial Number</th>
+                    <td>{{ student.serial_number }}</td>
+                </tr>
+                <tr>
+                    <th>Picture</th>
+                    <td>
+                        {% if student.picture %}
+                            <img src="{{ student.picture.url }}" alt="{{ student.name }}" style="max-width: 100px;">
+                        {% else %}
+                            No picture uploaded
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="picture">Update Picture:</label>
+                <input type="file" name="picture" id="picture" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Generate ID</button>
+            <a class="btn btn-secondary" href="{% url 'student_detail' student.pk %}">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
