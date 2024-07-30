@@ -1,16 +1,297 @@
-<!-- events/templates/event_list.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Event List</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        .search-bar, .filters, .sort-options {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .search-bar input, .filters select, .sort-options select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+        .search-bar button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+        .search-bar i {
+            margin-right: 5px;
+            color: white;
+        }
+        .create-event {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .create-event a {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: white;
+            background-color: #28a745;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .create-event a:hover {
+            background-color: #218838;
+        }
+        .create-event i {
+            margin-right: 8px;
+        }
+        .filters label, .sort-options label {
+            font-weight: bold;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            color: #333;
+        }
+        .filters select:focus, .sort-options select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .event-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .event-list li {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+        .event-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+        .event-list img {
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .event-info {
+            flex: 1;
+        }
+        .event-info h2 {
+            margin: 0 0 10px;
+            color: #333;
+        }
+        .event-info p {
+            margin: 5px 0;
+            color: #666;
+            display: flex;
+            align-items: center;
+        }
+        .event-info p i {
+            margin-right: 8px;
+            color: #007bff;
+            font-size: 1.2em;
+        }
+        .event-info .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+        }
+        .event-info .status.upcoming {
+            background-color: #28a745;
+        }
+        .event-info .status.ongoing {
+            background-color: #ffc107;
+            color: black;
+        }
+        .event-info .status.completed {
+            background-color: #dc3545;
+        }
+        .event-info .details-link {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            transition: color 0.3s;
+        }
+        .event-info .details-link i {
+            margin-left: 8px;
+        }
+        .event-info .details-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .pagination a, .pagination span {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 0 5px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        .pagination a:hover {
+            background-color: #0056b3;
+        }
+        .pagination .active {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+        }
+        @media (max-width: 600px) {
+            .search-bar input, .filters select, .sort-options select {
+                width: 100%;
+                margin: 5px 0;
+            }
+            .search-bar button {
+                width: 100%;
+                margin-top: 10px;
+            }
+            .event-list li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .event-list img {
+                margin-bottom: 10px;
+                width: 100%;
+                height: auto;
+            }
+            .event-info .details-link {
+                margin-left: 0;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 <body>
-    <h1>Event List</h1>
-    <ul>
-        {% for event in events %}
-            <li>{{ event.name }}</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'create' %}">Create Event</a>
+    <div class="container">
+        <h1>Event List</h1>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search events by name...">
+            <button type="button" id="search-button"><i class="fas fa-search"></i> Search</button>
+        </div>
+        <div class="filters">
+            <label for="location"><i class="fas fa-map-marker-alt icon"></i>Location:</label>
+            <select id="location" name="location">
+                <option value="">All Locations</option>
+                <option value="Location1">Location1</option>
+                <option value="Location2">Location2</option>
+                <!-- Add more locations as needed -->
+            </select>
+            <label for="category"><i class="fas fa-tags icon"></i>Category:</label>
+            <select id="category" name="category">
+                <option value="">All Categories</option>
+                <option value="Category1">Category1</option>
+                <option value="Category2">Category2</option>
+                <!-- Add more categories as needed -->
+            </select>
+        </div>
+        <div class="sort-options">
+            <label for="sort"><i class="fas fa-sort icon"></i>Sort by:</label>
+            <select id="sort" name="sort">
+                <option value="date">Date</option>
+                <option value="name">Name</option>
+                <option value="location">Location</option>
+            </select>
+        </div>
+        <ul class="event-list">
+            {% for event in events %}
+                <li>
+                    {% if event.image %}
+                    <img src="{{ event.image.url }}" alt="{{ event.event_name }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/120x80" alt="Default image for {{ event.event_name }}">
+                {% endif %}
+                
+                    <div class="event-info">
+                        <h2>{{ event.event_name }}</h2>
+                        <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong> {{ event.date }}</p>
+                        <p><i class="fas fa-clock"></i> <strong>Time:</strong> {{ event.time }}</p>
+                        <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> {{ event.location }}</p>
+                        <p><i class="fas fa-info-circle"></i> <strong>Status:</strong> <span class="status {{ event.status }}">{{ event.get_status_display }}</span></p>
+                        <p>{{ event.description|truncatewords:20 }}</p>
+                        <a href="{% url 'event_detail' event.pk %}" class="details-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo; First</a>
+                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">Previous</a>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <span class="active">{{ num }}</span>
+                {% else %}
+                    <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">Last &raquo;</a>
+            {% endif %}
+        </div>
+        <div class="create-event">
+            <a href="{% url 'event_create' %}"><i class="fas fa-plus"></i> Create New Event</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById('search-button').addEventListener('click', function() {
+            const searchQuery = document.getElementById('search').value;
+            const locationFilter = document.getElementById('location').value;
+            const categoryFilter = document.getElementById('category').value;
+            const sortOption = document.getElementById('sort').value;
+            const queryString = `?q=${searchQuery}&location=${locationFilter}&category=${categoryFilter}&sort=${sortOption}`;
+            window.location.href = queryString;
+        });
+    </script>
 </body>
 </html>
