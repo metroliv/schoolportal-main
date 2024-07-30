@@ -1,0 +1,149 @@
+{% extends 'basea.html' %}
+
+{% block title %}Login{% endblock %}
+<style>
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.errors {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.errors p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    background: #fff;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+/* Forms */
+form {
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form input[type="submit"],
+form button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form input[type="submit"],
+form button {
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover,
+form button:hover {
+    background: #555;
+}
+
+/* Links */
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+</style>
+{% block content %}
+    <h2>Login</h2>
+    {% if messages %}
+        <div class="errors">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        
+        <button type="submit">Login</button>
+    </form>
+    <div class="forgot-password">
+        <label><input type="checkbox">Remember me</label>
+        <a href="{% url 'password_reset' %}">Forgot Password?</a>
+    </div>
+    <div class="register-link">
+        <a href="{% url 'register' %}">Register if not registered</a>
+    </div>
+{% endblock %}

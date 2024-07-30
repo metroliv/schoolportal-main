@@ -1,0 +1,140 @@
+{% extends 'basea.html' %}
+
+{% block title %}Home{% endblock %}
+<style>
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.errors {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.errors p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    background: #fff;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+/* Forms */
+form {
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form input[type="submit"],
+form button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form input[type="submit"],
+form button {
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover,
+form button:hover {
+    background: #555;
+}
+
+/* Links */
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+</style>
+{% block content %}
+    <div class="home-container">
+        <h1>Welcome to Our School Management System</h1>
+        
+        <p>To access the full features of the system, please log in or register:</p>
+
+        <div class="cta-buttons">
+            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+            <a href="{% url 'register_student' %}" class="btn btn-secondary">Register as Student</a>
+            <a href="{% url 'register_staff' %}" class="btn btn-secondary">Register as Staff</a>
+        </div>
+
+        <section class="info">
+            <h2>About Us</h2>
+            <p>Our School Management System helps you manage student records, staff information, and more. Register to get started or log in if you already have an account.</p>
+        </section>
+    </div>
+{% endblock %}
