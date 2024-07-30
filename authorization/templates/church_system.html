@@ -1,0 +1,38 @@
+{% extends 'basea.html' %}
+
+{% block title %}Church Management System{% endblock %}
+<style>
+    .system-details {
+        margin: 50px auto;
+        max-width: 800px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .system-details h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .system-details p {
+        font-size: 1.1rem;
+        color: #6c757d;
+    }
+
+    .system-details .btn {
+        margin-top: 20px;
+    }
+</style>
+{% block content %}
+    <div class="system-details">
+        <h1>Church Management System</h1>
+        <p>Our Church Management System provides tools to manage church activities, member information, and events efficiently. With features designed to simplify administrative tasks, it is ideal for churches of all sizes.</p>
+        <a href="{% url 'contact' %}" class="btn btn-success">Acquire This System</a>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <!-- Include the footer block here if needed -->
+{% endblock %}

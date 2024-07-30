@@ -147,7 +147,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><i class="fas fa-church"></i> Church Management</h5>
                             <p class="card-text">Manage church activities, member information, and events effectively.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
+                            <a href="{% url 'church_system' %}" class="btn btn-primary">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -156,11 +156,17 @@
                         <div class="card-body">
                             <h5 class="card-title"><i class="fas fa-building"></i> Corporate Management</h5>
                             <p class="card-text">Streamline corporate operations and enhance productivity.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
+                            <a href="{% url 'corporate_system' %}" class="btn btn-primary">Learn More</a>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <section class="acquire-system container">
+            <h2 class="text-center">Acquire Our Systems</h2>
+            <p>If you are interested in acquiring any of our management systems, please contact us for more information and pricing details.</p>
+            <a href="{% url 'contact' %}" class="btn btn-success">Contact Us</a>
         </section>
     </div>
 {% endblock %}
