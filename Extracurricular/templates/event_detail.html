@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Details</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .event-image {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .event-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .event-details div {
+            flex: 1;
+            min-width: 45%;
+            margin: 10px 0;
+        }
+        .event-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .event-details th, .event-details td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .event-details th {
+            width: 30%;
+            color: #555;
+        }
+        .event-details td {
+            color: #333;
+        }
+        .back-link, .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 5px 0;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .back-link {
+            background-color: #007bff;
+        }
+        .back-link:hover {
+            background-color: #0056b3;
+        }
+        .social-links {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .social-links a {
+            background-color: #555;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 5px;
+        }
+        .social-links i {
+            margin-right: 5px;
+        }
+        .social-links .facebook { background: #3b5998; }
+        .social-links .twitter { background: #55acee; }
+        .social-links .linkedin { background: #0077b5; }
+        .social-links .whatsapp { background: #25d366; }
+        .social-links a:hover {
+            opacity: 0.8;
+        }
+        .map {
+            margin-top: 20px;
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+        }
+        iframe {
+            border: none;
+            width: 100%;
+            height: 300px;
+        }
+        @media (max-width: 600px) {
+            .event-details {
+                flex-direction: column;
+            }
+            .event-details div {
+                min-width: 100%;
+            }
+            .back-link, .social-links a {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>{{ event.event_name }}</h1>
+        <div class="event-image" style="background-image: url('{% if event.image %}{{ event.image.url }}{% else %}https://via.placeholder.com/800x300{% endif %}');"></div>
+        <div class="event-details">
+            <div>
+                <table>
+                    <tr>
+                        <th>Description:</th>
+                        <td>{{ event.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date:</th>
+                        <td>{{ event.date }}</td>
+                    </tr>
+                    <tr>
+                        <th>Time:</th>
+                        <td>{{ event.time }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <th>Location:</th>
+                        <td>{{ event.location }}</td>
+                    </tr>
+                    <tr>
+                        <th>Organizer:</th>
+                        <td>{{ event.organizer }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093707!2d144.95592831531995!3d-37.817209979751654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d9ec27a6504d!2sVictoria!5e0!3m2!1sen!2sau!4v1645239055564!5m2!1sen!2sau" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="social-links">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ event.event_name }}" class="twitter"><i class="fab fa-twitter"></i> Twitter</a>
+            <a href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}&title={{ event.event_name }}" class="linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+            <a href="https://api.whatsapp.com/send?text={{ event.event_name }}%20{{ request.build_absolute_uri }}" class="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+        <a href="{% url 'event_list' %}" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+    </div>
+</body>
+</html>
