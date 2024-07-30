@@ -6,146 +6,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}School Portal{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <style>
     /* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
 
-header {
-    background: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-}
+    header {
+        background: #343a40;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+    }
 
-header h1 {
-    margin: 0;
-}
+    header h1 {
+        margin: 0;
+    }
 
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
+    .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+    }
 
-.errors {
-    color: red;
-    margin-bottom: 15px;
-}
+    .errors {
+        color: red;
+        margin-bottom: 15px;
+    }
 
-.errors p {
-    margin: 0;
-    padding: 5px 0;
-}
+    .errors p {
+        margin: 0;
+        padding: 5px 0;
+    }
 
+    /* Navigation */
+    nav ul {
+        list-style: none;
+        padding: 0;
+    }
 
-/* Navigation */
-nav ul {
-    list-style: none;
-    padding: 0;
-}
+    nav ul li {
+        display: inline;
+        margin-right: 10px;
+    }
 
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
+    nav ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
+    /* Main Content */
+    main {
+        padding: 20px;
+        background: #fff;
+        margin-top: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-/* Main Content */
-main {
-    padding: 20px;
-    background: #fff;
-    margin-top: 20px;
-    border-radius: 5px;
-}
+    /* Forms */
+    form {
+        margin: 0 auto;
+        max-width: 500px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-/* Forms */
-form {
-    margin: 0 auto;
-    max-width: 500px;
-    padding: 20px;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+    form input[type="text"],
+    form input[type="password"],
+    form input[type="email"],
+    form input[type="submit"],
+    form button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
 
-form input[type="text"],
-form input[type="password"],
-form input[type="email"],
-form input[type="submit"],
-form button {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
+    form input[type="submit"],
+    form button {
+        background: #343a40;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
 
-form input[type="submit"],
-form button {
-    background: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
+    form input[type="submit"]:hover,
+    form button:hover {
+        background: #495057;
+    }
 
-form input[type="submit"]:hover,
-form button:hover {
-    background: #555;
-}
+    /* Links */
+    a {
+        color: #343a40;
+        text-decoration: none;
+    }
 
-/* Links */
-a {
-    color: #333;
-    text-decoration: none;
-}
+    a:hover {
+        text-decoration: underline;
+    }
 
-a:hover {
-    text-decoration: underline;
-}
-
-/* Footer */
-footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
+    /* Footer */
+    footer {
+        background: #343a40;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
 </style>
 <body>
     <header>
         <h1>School Portal</h1>
         <nav>
             <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
                 {% if user.is_authenticated %}
                     {% if user.is_staff %}
-                        <li><a href="{% url 'student_dashboard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'student_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                     {% elif user.is_student %}
-                        <li><a href="{% url 'student_dashboard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'student_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                     {% endif %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                 {% else %}
-                    <li><a href="{% url 'register_student' %}">Register as Student</a></li>
-                    <li><a href="{% url 'register_staff' %}">Register as Staff</a></li>
-                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register_student' %}"><i class="fas fa-user-graduate"></i> Register as Student</a></li>
+                    <li><a href="{% url 'register_staff' %}"><i class="fas fa-chalkboard-teacher"></i> Register as Staff</a></li>
+                    <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
                 {% endif %}
-
-                
+            </ul>
+        </nav>
     </header>
     <main>
         {% block content %}
@@ -155,5 +156,8 @@ footer {
     <footer>
         &copy; {{ current_year }} School Portal
     </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
