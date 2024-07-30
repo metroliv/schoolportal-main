@@ -27,12 +27,11 @@ SECRET_KEY = 'django-insecure-7isfdxj5f=nfec5&5xj-4dmq0xt1)kr2$fyc(g9ms%t%w6c$u3
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['schoolportal-main.onrender.com']
-
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
+    'schoolportal-main.onrender.com',
     
 ]
 # Application definition
