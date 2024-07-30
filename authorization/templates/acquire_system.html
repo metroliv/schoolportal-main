@@ -1,0 +1,16 @@
+{% extends 'basea.html' %}
+
+{% block title %}Acquisition Confirmation{% endblock %}
+
+{% block content %}
+    <div class="acquire-container">
+        <h1>Thank You, {{ name }}!</h1>
+        <p>Your request for the {{ system }} has been received. We will get back to you soon with further details.</p>
+        <p>If you have any questions or need immediate assistance, please contact us directly.</p>
+        <a href="{% url 'contact' %}" class="btn btn-primary">Contact Us</a>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <!-- Include the footer block here if needed -->
+{% endblock %}

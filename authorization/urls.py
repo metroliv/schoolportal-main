@@ -12,4 +12,5 @@ urlpatterns = [
     path('system/church/', views.church_system, name='church_system'),
     path('system/corporate/', views.corporate_system, name='corporate_system'),
     path('contact/', views.contact, name='contact'),
+    path('acquire/', views.acquire_system, name='acquire_system'),  # New URL pattern
 ]

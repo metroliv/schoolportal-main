@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordResetForm, AuthenticationForm, UserCreationForm
 from django.core.mail import send_mail
 
+from django.conf import settings
 def home(request):
     return render(request, 'home.html')
 
@@ -100,3 +101,28 @@ def corporate_system(request):
 
 def contact(request):
     return render(request, 'contact.html')
+def acquire_system(request):
+    if request.method == 'POST':
+        # Extract data from the form
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        system = request.POST.get('system')
+        message = request.POST.get('message', '')
+
+        # Optionally, you could send an email or save the data to the database
+        # Example of sending an email (adjust to fit your configuration)
+        subject = 'System Acquisition Request'
+        body = f"""
+        Name: {name}
+        Email: {email}
+        Phone: {phone}
+        System: {system}
+        Message: {message}
+        """
+        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, ['support@managementportal.com'])
+
+        # Redirect or render a confirmation page
+        return render(request, 'acquire_confirmation.html', {'name': name, 'system': system})
+
+    return render(request, 'acquire_system.html')
