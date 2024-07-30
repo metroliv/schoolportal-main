@@ -37,3 +37,13 @@ class Staff(models.Model):
 
     def __str__(self):
         return self.staff_id
+class UserProfile(models.Model):   
+    profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    location = models.CharField(max_length=100, blank=True, null=True)
+    hobby = models.CharField(max_length=100, blank=True, null=True)
+    gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username

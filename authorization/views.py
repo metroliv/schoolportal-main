@@ -4,6 +4,11 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordResetForm, AuthenticationForm, UserCreationForm
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
+from .forms import UserProfileForm
+from .models import UserProfile
+
+
 
 from django.conf import settings
 def home(request):
@@ -101,6 +106,7 @@ def corporate_system(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
 def acquire_system(request):
     if request.method == 'POST':
         # Extract data from the form
@@ -126,3 +132,18 @@ def acquire_system(request):
         return render(request, 'acquire_confirmation.html', {'name': name, 'system': system})
 
     return render(request, 'acquire_system.html')
+def profile_view(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user_profile)
+    
+    context = {
+        'user_profile': user_profile,
+        'form': form
+    }
+    return render(request, 'profile.html', context)

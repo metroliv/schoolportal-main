@@ -24,11 +24,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7isfdxj5f=nfec5&5xj-4dmq0xt1)kr2$fyc(g9ms%t%w6c$u3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+
 
 ALLOWED_HOSTS = ['schoolportal-main.onrender.com']
 
 
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -140,7 +146,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# settings.py
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.victormulinge92@gmail.com'
 EMAIL_PORT = 587
