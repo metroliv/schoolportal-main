@@ -573,7 +573,35 @@ body.loading {
             margin-right: 8px;
         }
        
-        
+        .hamburger{
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+
+        }
+
+        .hamburge-icon{
+            width: 25px;
+            height: 3px;
+            background-color: black;
+            display: block;
+            margin: 5px 0;
+        }
+        @media (max-width: 768px){
+            .hamburger{
+                display: none;                
+            }
+            .nav-menu{
+                display: none;
+                flex-direction: column;
+
+            }
+            .nav-menu.active{
+                display: flex;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -610,10 +638,9 @@ body.loading {
                 {% endif %}
             </div>
             <ul>
-                <li><a href="{url'/' }" id="dashboard-link">Dashboard</a></li>
+                              
+             
                 
-                <li><a href="{% url 'chat_list' %}" id="chat_list">Chat with Users</a></li>
-                <li><a href="#" id="assignments-link">Assignments</a></li>
                 <div class="logout">
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -623,6 +650,13 @@ body.loading {
                 </div>
             </ul>
         </nav>
+        <a href="#">
+        <button class="hamburger" artia-label="Menu" aria-expanded="false">
+        <span class="hamburger-icon"></samn>
+        <samn class="hamburger-icon"></samn>
+        <samn class="hamburger-icon"></samn>
+    </button>
+    </a>
     </header>
 
     <main>
@@ -631,10 +665,12 @@ body.loading {
             <p>Welcome to the School Portal!</p>
             <div class="container">
                 <div class="sidebar">
-                    <ul>
-                    
+                    <!--<div class="nav-menu" aria-hidden="true">-->
+                    <ul>      
+                        <li><a href="/" id="dashboard-link">Dashboard</a></li>              
                         <li><a href="{% url 'course_list' %}">Courses</a></li>
                         <li><a href="{% url 'grades_list' %}">Grades</a></li>
+                        <li><a href="#" id="assignments-link">Assignments</a></li>
                         <li><a href="{% url 'attendance_report' %}">Attendance</a></li>                        
                         <li><a href="{% url 'student_list' %}" id="student_list_link">Students</a></li>
                         <li><a href="{% url 'staff_list' %}" id="staff_list_link">Staff</a></li>
@@ -654,6 +690,7 @@ body.loading {
                         <li><a href="#">Meeting</a></li>
                         <li><a href="{% url 'user_settings' %}">Settings</a></li>
                     </ul>
+               <!--</div>--> 
                 </div>
                 
                 <div class="main-content" id="main-content">
@@ -678,7 +715,7 @@ body.loading {
         <div class="icon-container">
             <h2>Communication</h2>
             <div class="app-icon">
-                <a href="{% url 'chat_list' %}">
+                <a href="{% url 'chat_list' %}" id="chat_list">
                     <i class="fas fa-comments"></i>
                     <p>Chat</p>
                 </a>
@@ -754,7 +791,7 @@ body.loading {
                 </a>
             </div>
             <div class="app-icon">
-                <a href="#">
+                <a href="{% url 'event_list' %}">
                     <i class="fas fa-thumbtack"></i>
                     <p>Pin Event</p>
                 </a>
@@ -848,13 +885,13 @@ body.loading {
     <div class="icon-container">
         <h2>Events</h2>
         <div class="app-icon">
-            <a href="#">
+            <a href="{% url 'event_list' %}">
                 <i class="fas fa-calendar-alt"></i>
                 <p>Event Calendar</p>
             </a>
         </div>
         <div class="app-icon">
-            <a href="#">
+            <a href="{% url 'event_list' %}#">
                 <i class="fas fa-bell"></i>
                 <p>Upcoming Events</p>
             </a>
@@ -884,13 +921,13 @@ body.loading {
             </a>
         </div>
         <div class="app-icon">
-            <a href="#">
+            <a href="{% url 'event_list' %}">
                 <i class="fas fa-map-marker-alt"></i>
                 <p>Event Locations</p>
             </a>
         </div>
         <div class="app-icon">
-            <a href="#">
+            <a href="{% url 'event_list' %}">
                 <i class="fas fa-camera"></i>
                 <p>Event Gallery</p>
             </a>
@@ -991,7 +1028,7 @@ body.loading {
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <p><a href="#">Home</a></p>
-                <p><a href="#">Events</a></p>
+                <p><a href="{% url 'event_list' %}">Events</a></p>
                 <p><a href="#">Members</a></p>
                 <p><a href="{% url 'category_list' %}" id="category_list">Help Center</a></p>
             </div>
@@ -1039,6 +1076,13 @@ body.loading {
             
             document.body.classList.remove('loading');
         });
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger .addEventListener('click',() =>{
+            const isExpanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+            navMenu.setAttribute.toggle('active');
+        })
     </script>
     
     
