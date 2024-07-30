@@ -12,27 +12,141 @@
     }
 
     .system-details h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
         margin-bottom: 20px;
     }
 
     .system-details p {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         color: #6c757d;
     }
 
     .system-details .btn {
         margin-top: 20px;
     }
+
+    .features-section, .testimonials-section, .cta-section {
+        margin-top: 40px;
+    }
+
+    .features-section .feature {
+        margin-bottom: 20px;
+    }
+
+    .features-section .feature h3 {
+        font-size: 1.5rem;
+    }
+
+    .testimonials-section .testimonial {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .testimonials-section .testimonial h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .cta-section {
+        text-align: center;
+        background: #343a40;
+        color: #fff;
+        padding: 40px;
+        border-radius: 5px;
+    }
+
+    .cta-section h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .cta-section .btn {
+        background: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .cta-section .btn:hover {
+        background: #218838;
+    }
 </style>
 {% block content %}
     <div class="system-details">
         <h1>Church Management System</h1>
-        <p>Our Church Management System provides tools to manage church activities, member information, and events efficiently. With features designed to simplify administrative tasks, it is ideal for churches of all sizes.</p>
-        <a href="{% url 'contact' %}" class="btn btn-success">Acquire This System</a>
+        <p>Our Church Management System provides comprehensive tools to manage church activities, member information, and events efficiently. Designed to simplify administrative tasks, it is ideal for churches of all sizes.</p>
+
+        <section class="features-section">
+            <h2>Key Features</h2>
+            <div class="feature">
+                <h3><i class="fas fa-users"></i> Member Management</h3>
+                <p>Maintain detailed records of church members, including contact information, attendance, and contributions.</p>
+            </div>
+            <div class="feature">
+                <h3><i class="fas fa-calendar-alt"></i> Event Management</h3>
+                <p>Organize and manage church events, schedules, and volunteer sign-ups seamlessly.</p>
+            </div>
+            <div class="feature">
+                <h3><i class="fas fa-donate"></i> Contribution Tracking</h3>
+                <p>Track donations and generate detailed reports to keep financial records transparent and accurate.</p>
+            </div>
+            <div class="feature">
+                <h3><i class="fas fa-envelope"></i> Communication Tools</h3>
+                <p>Send newsletters, announcements, and event reminders to members via email and SMS.</p>
+            </div>
+        </section>
+
+        <section class="testimonials-section">
+            <h2>Testimonials</h2>
+            <div class="testimonial">
+                <h4>John Doe, Pastor</h4>
+                <p>"The Church Management System has revolutionized how we handle our administrative tasks. It's user-friendly and incredibly efficient."</p>
+            </div>
+            <div class="testimonial">
+                <h4>Jane Smith, Church Administrator</h4>
+                <p>"With this system, managing member information and organizing events has become so much easier. It's a blessing for our church."</p>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to Enhance Your Church Management?</h2>
+            <p>Contact us today to learn more about our Church Management System and how it can benefit your church.</p>
+            <a href="{% url 'contact' %}" class="btn">Acquire This System</a>
+        </section>
     </div>
 {% endblock %}
 
 {% block footer %}
-    <!-- Include the footer block here if needed -->
+    <footer>
+        <div class="container">
+            <div class="quick-links">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register_student' %}">Register as Student</a></li>
+                    <li><a href="{% url 'register_staff' %}">Register as Staff</a></li>
+                </ul>
+            </div>
+            <div class="contact-info">
+                <h5>Contact Us</h5>
+                <ul>
+                    <li>Email: support@managementportal.com</li>
+                    <li>Phone: +123 456 7890</li>
+                    <li>Address: 123 Portal St, Management City</li>
+                </ul>
+            </div>
+            <div class="social-media">
+                <h5>Follow Us</h5>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <p>&copy; {{ current_year }} Management Portal</p>
+    </footer>
 {% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'basea.html' %}
+
+{% block title %}Systems Overview{% endblock %}
+<style>
+    .overview-container {
+        margin: 50px auto;
+        max-width: 900px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .overview-container h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .overview-container .btn {
+        margin-top: 20px;
+    }
+
+    .system-card {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .system-card h2 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .system-card p {
+        font-size: 1.1rem;
+        color: #6c757d;
+    }
+
+    .system-card a {
+        margin-top: 10px;
+        display: inline-block;
+        background: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .system-card a:hover {
+        background: #0056b3;
+    }
+</style>
+{% block content %}
+    <div class="overview-container">
+        <h1>Explore Our Management Systems</h1>
+        
+        <div class="system-card">
+            <h2>Church Management System</h2>
+            <p>Our Church Management System offers a comprehensive suite of features to streamline church administration, including member management, event planning, contribution tracking, and communication tools.</p>
+            <a href="{% url 'church_system' %}">Learn More</a>
+        </div>
+
+        <div class="system-card">
+            <h2>Corporate Management System</h2>
+            <p>Our Corporate Management System is designed to enhance business operations with features for employee management, project tracking, and performance evaluation.</p>
+            <a href="{% url 'corporate_system' %}">Learn More</a>
+        </div>
+
+        <section class="cta-section">
+            <h2>Interested in Acquiring a System?</h2>
+            <p>If you are interested in purchasing or acquiring any of our management systems, please contact us for more information and pricing details.</p>
+            <a href="{% url 'contact' %}" class="btn btn-success">Contact Us</a>
+        </section>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <!-- Include the footer block here if needed -->
+{% endblock %}

@@ -91,3 +91,12 @@ def password_reset_request(request):
     else:
         form = PasswordResetForm()
     return render(request, 'password_reset_form.html', {'form': form})
+
+def church_system(request):
+    return render(request, 'church_system.html')
+
+def corporate_system(request):
+    return render(request, 'corporate_system.html')
+
+def contact(request):
+    return render(request, 'contact.html')
