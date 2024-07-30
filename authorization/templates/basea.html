@@ -145,31 +145,7 @@ footer {
                     <li><a href="{% url 'login' %}">Login</a></li>
                 {% endif %}
 
-                <nav>
-                    <ul>
-                        {% if user.is_authenticated %}
-                            {% if user.is_student %}
-                                <li><a href="{% url 'course_list' %}">Courses</a></li>
-                                <li><a href="{% url 'grades_list' %}">Grades</a></li>
-                                <li><a href="#" id="assignments-link">Assignments</a></li>
-                                <li><a href="{% url 'attendance_report' %}">Attendance</a></li>
-                                <li><a href="{% url 'student_list' %}" id="student_list_link">Students</a></li>
-                            {% elif user.is_staff %}
-                                <li><a href="#" id="enter-marks-link">Enter Marks</a></li>
-                                <li><a href="{% url 'staff_list' %}" id="staff_list_link">Staff</a></li>
-                                <li><a href="#" id="new-group-link">New Group</a></li>
-                                <li><a href="#" id="chats-link">Chats</a></li>
-                                <li><a href="#" id="announcements-link">Announcements</a></li>
-                                <li><a href="#" id="meeting-link">Meeting</a></li>
-                                <li><a href="{% url 'event_list' %}" id="pin-event-link">Pin Event</a></li>
-                                </ul>
-                            {% endif %}
-                        {% endif %}
-                        
-                </nav>
                 
-            </ul>
-        </nav>
     </header>
     <main>
         {% block content %}

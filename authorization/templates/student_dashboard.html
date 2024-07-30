@@ -123,23 +123,38 @@ footer {
 {% block content %}
     <h2>Welcome, {{ user.username }} (Student)</h2>
     <p>This is the student dashboard where you can manage your courses and view your progress.</p>
-    <!-- Add student-specific content here -->
-    <li><a href="{% url 'course_list' %}">Courses</a></li>
-    <li><a href="{% url 'grades_list' %}">Grades</a></li>
-    <li><a href="#" id="assignments-link">Assignments</a></li>
-    <li><a href="{% url 'attendance_report' %}">Attendance</a></li>
-    <li><a href="{% url 'student_list' %}" id="student_list_link">Students</a></li>
-{% elif user.is_staff %}
-                        <li><a href="{% url 'profile' %}" id="profile_link">Profile</a></li>
-                        <li><a href="{% url 'category_list' %}" id="category_list">Help</a></li>
-                        <li><a href="{% url 'group_list' %}">Community</a></li>
-                        <li><a href="#">New Group</a></li>
-                        <li><a href="#">Chats</a></li>
-                        <li><a href="#">Announcements</a></li>
-                        <li><a href="#">Create Live Chat</a></li>
-                        <li><a href="create_group">WhatsApp Group</a></li>
-                        <li><a href="#">Account</a></li>
-                        <li><a href="#">Notifications</a></li>
-                        <li><a href="{% url 'user_settings' %}">Settings</a></li>
-                    </ul>
-{% endblock %}
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+                {% if user.is_student %}
+                    <li><a href="{% url 'course_list' %}">Courses</a></li>
+                    <li><a href="{% url 'grades_list' %}">Grades</a></li>
+                    <li><a href="#" id="assignments-link">Assignments</a></li>
+                    <li><a href="{% url 'attendance_report' %}">Attendance</a></li>
+                    <li><a href="{% url 'student_list' %}" id="student_list_link">Students</a></li>
+                {% elif user.is_staff %}
+                    <li><a href="#" id="enter-marks-link">Enter Marks</a></li>
+                    <li><a href="{% url 'staff_list' %}" id="staff_list_link">Staff</a></li>
+                    <li><a href="#" id="new-group-link">New Group</a></li>
+                    <li><a href="#" id="chats-link">Chats</a></li>
+                    <li><a href="#" id="announcements-link">Announcements</a></li>
+                    <li><a href="#" id="meeting-link">Meeting</a></li>
+                    <li><a href="{% url 'event_list' %}" id="pin-event-link">Pin Event</a></li>
+                {% endif %}
+            {% endif %}
+            <li><a href="{% url 'profile' %}" id="profile_link">Profile</a></li>
+            <li><a href="{% url 'category_list' %}" id="category_list">Help</a></li>
+            <li><a href="{% url 'group_list' %}">Community</a></li>
+            <li><a href="#">New Group</a></li>
+            <li><a href="#">Chats</a></li>
+            <li><a href="#">Announcements</a></li>
+            <li><a href="#">Create Live Chat</a></li>
+            <li><a href="create_group">WhatsApp Group</a></li>
+            <li><a href="#">Account</a></li>
+            <li><a href="#">Notifications</a></li>
+            <li><a href="{% url 'user_settings' %}">Settings</a></li>
+        </ul>
+    </nav>
+    
+</ul>
+</nav>
