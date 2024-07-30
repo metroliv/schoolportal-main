@@ -38,17 +38,63 @@
         color: #6c757d;
     }
 
-    .features {
+    .features, .other-systems {
         margin-top: 40px;
     }
 
-    .features .card {
+    .features .card, .other-systems .card {
         margin: 20px 0;
+    }
+
+    footer {
+        background: #343a40;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    footer .container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    footer .quick-links, footer .contact-info, footer .social-media {
+        margin: 10px;
+        flex: 1;
+    }
+
+    footer .quick-links ul, footer .contact-info ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    footer .quick-links ul li, footer .contact-info ul li {
+        margin-bottom: 10px;
+    }
+
+    footer .quick-links ul li a, footer .contact-info ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    footer .quick-links ul li a:hover, footer .contact-info ul li a:hover {
+        text-decoration: underline;
+    }
+
+    footer .social-media a {
+        color: #fff;
+        margin: 0 10px;
+        font-size: 1.5rem;
+    }
+
+    footer .social-media a:hover {
+        color: #ccc;
     }
 </style>
 {% block content %}
     <div class="home-container">
-        <h1>Welcome to Our School Management System</h1>
+        <h1>Welcome to Our Management Systems</h1>
         
         <p>To access the full features of the system, please log in or register:</p>
 
@@ -60,7 +106,7 @@
 
         <section class="info">
             <h2>About Us</h2>
-            <p>Our School Management System helps you manage student records, staff information, and more. Register to get started or log in if you already have an account.</p>
+            <p>Our management systems help you manage various types of organizations effectively. Register to get started or log in if you already have an account.</p>
         </section>
 
         <section class="features container">
@@ -92,5 +138,60 @@
                 </div>
             </div>
         </section>
+
+        <section class="other-systems container">
+            <h2 class="text-center">Other Systems We Offer</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-church"></i> Church Management</h5>
+                            <p class="card-text">Manage church activities, member information, and events effectively.</p>
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-building"></i> Corporate Management</h5>
+                            <p class="card-text">Streamline corporate operations and enhance productivity.</p>
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+{% endblock %}
+
+{% block footer %}
+    <footer>
+        <div class="container">
+            <div class="quick-links">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register_student' %}">Register as Student</a></li>
+                    <li><a href="{% url 'register_staff' %}">Register as Staff</a></li>
+                </ul>
+            </div>
+            <div class="contact-info">
+                <h5>Contact Us</h5>
+                <ul>
+                    <li>Email: support@managementportal.com</li>
+                    <li>Phone: +123 456 7890</li>
+                    <li>Address: 123 Portal St, Management City</li>
+                </ul>
+            </div>
+            <div class="social-media">
+                <h5>Follow Us</h5>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <p>&copy; {{ current_year }} Management Portal</p>
+    </footer>
 {% endblock %}
