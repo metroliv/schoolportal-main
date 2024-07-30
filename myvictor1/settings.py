@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'student_management',
     'academic',
     'Extracurricular',
+     'authorization',
     
 ]
 
