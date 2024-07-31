@@ -16,6 +16,12 @@ from django.utils.encoding import force_bytes
 from .models import UserSettings
 from .forms import SubscriptionForm
 from .models import Subscription  
+from django.shortcuts import render
+from .models import Book
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView
+from .tasks import add
 
 
 
@@ -262,3 +268,19 @@ def subscribe(request):
         form = SubscriptionForm()
 
     return render(request, 'subscribe.html', {'form': form})
+
+@method_decorator(cache_page(60 * 15), name='dispatch')
+class CachedBookListView(ListView):
+    model = Book
+    template_name = 'books/book_list.html'
+
+# Example of optimized query with caching for function-based view
+@cache_page(60 * 15)  # Cache for 15 minutes
+def book_list(request):
+    books = Book.objects.select_related('author').all()
+    return render(request, 'books/book_list.html', {'books': books})
+
+# Example of using Celery task
+def my_view(request):
+    result = add.delay(2, 2)
+    return render(request, 'my_template.html', {'result': result})

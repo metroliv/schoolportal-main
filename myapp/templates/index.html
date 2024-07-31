@@ -1,4 +1,5 @@
 {% load static %}
+{% load compress %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
     <link rel="icon" type="image" href="fb.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School Portal</title>
+    {% compress css %}
     <style>
 /* styles.css */
 
@@ -603,6 +605,7 @@ body.loading {
         }
 
     </style>
+        {% endcompress %}
 </head>
 <body>
     <div id="preloader-flower">

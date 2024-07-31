@@ -32,7 +32,7 @@ urlpatterns = [
     path('academic/', include('academic.urls')),
     path('Extracurricular/',include('Extracurricular.urls')),
     path('authorization/',include('authorization.urls')),
-     
+    path('__debug__/', include('debug_toolbar.urls')),    
     
     
          
