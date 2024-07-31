@@ -140,7 +140,12 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
+    
+    
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -197,7 +202,9 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.staticfiles.StaticFilesPanel',
     'debug_toolbar.panels.logging.LoggingPanel',
     
-    'debug_toolbar.panels.redirects.RedirectsPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel', 
+        
+    'myapp.custom_panel.CustomPanel',
 ]
 
 

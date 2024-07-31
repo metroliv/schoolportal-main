@@ -1,0 +1,19 @@
+<!-- myapp/templates/user_diagnostic.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Diagnostic</title>
+</head>
+<body>
+    <h1>System Status</h1>
+    <p>{{ status }}</p>
+
+    <h2>User Information</h2>
+    <ul>
+        <li>Authenticated: {{ user_info.is_authenticated }}</li>
+        <li>Username: {{ user_info.username }}</li>
+        <li>Email: {{ user_info.email }}</li>
+    </ul>
+</body>
+</html>

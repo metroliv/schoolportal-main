@@ -284,3 +284,17 @@ def book_list(request):
 def my_view(request):
     result = add.delay(2, 2)
     return render(request, 'my_template.html', {'result': result})
+
+
+
+
+def user_diagnostic_view(request):
+    context = {
+        'status': 'All systems operational',
+        'user_info': {
+            'is_authenticated': request.user.is_authenticated,
+            'username': request.user.username if request.user.is_authenticated else 'Guest',
+            'email': request.user.email if request.user.is_authenticated else 'N/A',
+        }
+    }
+    return render(request, 'user_diagnostic.html', context)

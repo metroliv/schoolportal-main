@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import profile, profile_edit
 from .views import subscribe
+from .views import user_diagnostic_view
 
 
 urlpatterns = [
@@ -27,5 +28,9 @@ urlpatterns = [
     path('staff/new/', views.staff_create, name='staff_create'),
     path('staff/<int:pk>/edit/', views.staff_update, name='staff_update'),
     path('staff/<int:pk>/delete/', views.staff_delete, name='staff_delete'),
+    path('user-diagnostic/', user_diagnostic_view, name='user_diagnostic'),
     path('subscribe/', subscribe, name='subscribe'),
 ]
+
+
+
