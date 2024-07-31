@@ -15,13 +15,18 @@ from django.contrib.auth.tokens import default_token_generator as token_generato
 from django.utils.encoding import force_bytes
 from .models import UserSettings
 from .forms import SubscriptionForm
-from .models import Subscription  
-from django.shortcuts import render
+from .models import Subscription 
+
 from .models import Book
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 from .tasks import add
+
+from django.db.models import Q
+from student_management.models import Student
+from Extracurricular.models import Events
+from academic.models import Assignment, Course
 
 
 
@@ -298,3 +303,24 @@ def user_diagnostic_view(request):
         }
     }
     return render(request, 'user_diagnostic.html', context)
+
+
+def search_main(request):
+    query = request.GET.get('q', '')
+    students = Student.objects.filter(name__icontains=query) if query else []
+    events = Event.objects.filter(name__icontains=query) if query else []
+    assignments = Assignment.objects.filter(title__icontains=query) if query else []
+    courses = Course.objects.filter(title__icontains=query) if query else []
+
+    results_found = students.exists() or events.exists() or assignments.exists() or courses.exists()
+
+    context = {
+        'query': query,
+        'students': students,
+        'events': events,
+        'assignments': assignments,
+        'courses': courses,
+        'results_found': results_found,
+    }
+
+    return render(request, 'search_main.html', context)

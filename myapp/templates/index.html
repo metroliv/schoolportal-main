@@ -1,5 +1,5 @@
 {% load static %}
-{% load compress %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +9,7 @@
     <link rel="icon" type="image" href="fb.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School Portal</title>
-    {% compress css %}
+    
     <style>
 /* styles.css */
 
@@ -605,7 +605,7 @@ body.loading {
         }
 
     </style>
-        {% endcompress %}
+        
 </head>
 <body>
     <div id="preloader-flower">
@@ -702,8 +702,12 @@ body.loading {
                         <h1>School Portal Dashboard</h1>
                     
                     <div class="search-container">
-                        <input type="text" placeholder="Search..." class="search-input">
-                        <button class="search-button"><i class="fas fa-search"></i></button>
+                        <form method="GET" action="{% url 'search_main' %}">
+                            <input type="text" name="q" placeholder="Search..." class="search-input" value="{{ query }}">
+                            <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                        </form>
+                        
+                        
                     </div>
                 </div>
                     <video autoplay muted loop class="background-video video1">
@@ -1087,8 +1091,8 @@ body.loading {
             navMenu.setAttribute.toggle('active');
         })
         
+        
     </script>
-    
     
     
  

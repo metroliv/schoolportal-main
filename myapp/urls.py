@@ -1,13 +1,12 @@
+# myapp/urls.py
+
 from django.urls import path
 from . import views
-from .views import profile, profile_edit
-from .views import subscribe
-from .views import user_diagnostic_view
-
+from .views import profile, profile_edit, subscribe, user_diagnostic_view, search_main, chat_room
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('profile/', views.profile, name='profile'),
+    path('profile/', profile, name='profile'),
     path('profile/edit/', profile_edit, name='profile_edit'),
     path('counter/', views.counter, name='counter'),
     path('help/', views.help, name='help'),
@@ -20,7 +19,7 @@ urlpatterns = [
     path('articles/<int:category_id>/', views.article_list, name='article_list'),
     path('post/<int:pk>/', views.post_detail, name='post_detail'),
     path('posts/', views.post_list, name='post_list'),
-    path('<str:room>/', views.chat_room, name='room'),    
+    path('<str:room>/', chat_room, name='room'),
     path('my_model/', views.my_model, name='my_model'),
     path('settings/', views.user_settings, name='user_settings'),
     path('staff_list/', views.staff_list, name='staff_list'),
@@ -30,7 +29,5 @@ urlpatterns = [
     path('staff/<int:pk>/delete/', views.staff_delete, name='staff_delete'),
     path('user-diagnostic/', user_diagnostic_view, name='user_diagnostic'),
     path('subscribe/', subscribe, name='subscribe'),
+    path('search_main/', search_main, name='search_main'),
 ]
-
-
-
