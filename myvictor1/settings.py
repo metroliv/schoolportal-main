@@ -29,13 +29,6 @@ DEBUG = True
 
 
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    'schoolportal-main.onrender.com',
-    
-]
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,7 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    
+   
 ]
 
 ROOT_URLCONF = 'myvictor1.urls'
