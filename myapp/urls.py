@@ -2,7 +2,7 @@
 
 from django.urls import path
 from . import views
-from .views import profile, profile_edit, subscribe, user_diagnostic_view, search_main, chat_room
+from .views import profile, profile_edit, subscribe, user_diagnostic_view, search_main, chat_room, test_view
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -30,4 +30,5 @@ urlpatterns = [
     path('user-diagnostic/', user_diagnostic_view, name='user_diagnostic'),
     path('subscribe/', subscribe, name='subscribe'),
     path('search_main/', search_main, name='search_main'),
+    path('test/', test_view, name='test_view'),
 ]

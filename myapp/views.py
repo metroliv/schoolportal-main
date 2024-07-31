@@ -307,20 +307,24 @@ def user_diagnostic_view(request):
 
 def search_main(request):
     query = request.GET.get('q', '')
-    students = Student.objects.filter(name__icontains=query) if query else []
-    events = Event.objects.filter(name__icontains=query) if query else []
-    assignments = Assignment.objects.filter(title__icontains=query) if query else []
-    courses = Course.objects.filter(title__icontains=query) if query else []
+    students = []
+    events = []
+    assignments = []
+    courses = []
 
-    results_found = students.exists() or events.exists() or assignments.exists() or courses.exists()
+    if query:
+        students = Student.objects.filter(name__icontains=query)
+        events = Events.objects.filter(name__icontains=query)
+        assignments = Assignment.objects.filter(title__icontains=query)
+        courses = Course.objects.filter(title__icontains=query)
 
-    context = {
+    return render(request, 'search_main.html', {
         'query': query,
         'students': students,
         'events': events,
         'assignments': assignments,
         'courses': courses,
-        'results_found': results_found,
-    }
+    })
 
-    return render(request, 'search_main.html', context)
+def test_view(request):
+    return render(request, 'test.html', {})

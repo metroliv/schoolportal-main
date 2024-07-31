@@ -668,7 +668,7 @@ body.loading {
             <p>Welcome to the School Portal!</p>
             <div class="container">
                 <div class="sidebar">
-                    <!--<div class="nav-menu" aria-hidden="true">-->
+                    
                     <ul>      
                         <li><a href="/" id="dashboard-link">Dashboard</a></li>              
                         <li><a href="{% url 'course_list' %}">Courses</a></li>
@@ -693,7 +693,7 @@ body.loading {
                         <li><a href="#">Meeting</a></li>
                         <li><a href="{% url 'user_settings' %}">Settings</a></li>
                     </ul>
-               <!--</div>--> 
+               
                 </div>
                 
                 <div class="main-content" id="main-content">
@@ -702,10 +702,12 @@ body.loading {
                         <h1>School Portal Dashboard</h1>
                     
                     <div class="search-container">
+                        
                         <form method="GET" action="{% url 'search_main' %}">
                             <input type="text" name="q" placeholder="Search..." class="search-input" value="{{ query }}">
-                            <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                            <button type="submit" class="search-button"><i class="fas fa-search"></i> Search</button>
                         </form>
+
                         
                         
                     </div>
@@ -1091,6 +1093,85 @@ body.loading {
             navMenu.setAttribute.toggle('active');
         })
         
+        //search
+        const searchForm = document.getElementById('search-form');
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+
+        // Example data - replace with your actual data or API call
+        const data = {
+            students: [
+                { name: "Alice Johnson" },
+                { name: "Bob Smith" },
+                { name: "Charlie Brown" }
+            ],
+            events: [
+                { name: "School Fair" },
+                { name: "Science Olympiad" },
+                { name: "Art Exhibition" }
+            ],
+            assignments: [
+                { title: "Math Homework" },
+                { title: "History Essay" },
+                { title: "Science Project" }
+            ],
+            courses: [
+                { title: "Biology 101" },
+                { title: "Algebra II" },
+                { title: "World History" }
+            ]
+        };
+
+        function filterResults(query) {
+            const results = {
+                students: data.students.filter(item => item.name.toLowerCase().includes(query.toLowerCase())),
+                events: data.events.filter(item => item.name.toLowerCase().includes(query.toLowerCase())),
+                assignments: data.assignments.filter(item => item.title.toLowerCase().includes(query.toLowerCase())),
+                courses: data.courses.filter(item => item.title.toLowerCase().includes(query.toLowerCase()))
+            };
+
+            return results;
+        }
+
+        function displayResults(results) {
+            searchResults.innerHTML = '';
+
+            let resultsFound = false;
+
+            for (const [category, items] of Object.entries(results)) {
+                if (items.length > 0) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.innerHTML = `<h2>${capitalizeFirstLetter(category)}</h2>`;
+                    items.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'result-item';
+                        itemDiv.textContent = category === 'students' || category === 'events' ? item.name : item.title;
+                        categoryDiv.appendChild(itemDiv);
+                    });
+                    searchResults.appendChild(categoryDiv);
+                    resultsFound = true;
+                }
+            }
+
+            if (!resultsFound) {
+                searchResults.innerHTML = '<p class="no-results">No results found.</p>';
+            }
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // Handle form submission
+        searchForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent the default form submission
+            const query = searchInput.value;
+            const results = filterResults(query);
+            displayResults(results);
+        });
+    </script>
+</body>
+</html>
         
     </script>
     
